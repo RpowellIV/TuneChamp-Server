@@ -18,7 +18,10 @@ module.exports = (sequelize, DataTypes) => {
     lastName: DataTypes.STRING,
     userId: DataTypes.STRING,
     totalScore: DataTypes.INTEGER,
-    gamemMaster: DataTypes.BOOLEAN
+    userName:  DataTypes.STRING,
+    country: DataTypes.STRING,
+    spotifyRefreshToken: DataTypes.STRING,
+    spotifyAccessToken:  DataTypes.STRING
   }, {
     sequelize,
     modelName: 'User',

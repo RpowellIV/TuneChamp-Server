@@ -20,8 +20,17 @@ module.exports = {
       totalScore: {
         type: Sequelize.INTEGER
       },
-      gamemMaster: {
-        type: Sequelize.BOOLEAN
+      userName:  {
+        type: Sequelize.STRING
+      },
+      country: {
+        type: Sequelize.STRING
+      },
+      spotifyRefreshToken: {
+        type: Sequelize.STRING
+      },
+      spotifyAccessToken:  {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
