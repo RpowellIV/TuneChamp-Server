@@ -1,10 +1,10 @@
-// const express = require('express');
-// const heart = express();
+const express = require('express');
+const heart = express();
 
-// heart.get('/', (req,res) => {
-//     res.json({
-//         is:"working"
-//     })
-// });
+heart.get('/', (req,res) => {
+    res.json({
+        is:"working"
+    })
+});
 
-// module.exports = heart;
+module.exports = heart;
