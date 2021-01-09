@@ -1,10 +1,9 @@
-const express = require('express');
-const heart = express();
+module.exports = (app) => {
 
-heart.get('/', (req,res) => {
-    res.json({
-        is:"working"
-    })
-});
+    app.get('/heartbeat', (req, res) => {
+      res.json({
+        message: "We have a heartbeat."
+      })
+    });
 
-module.exports = heart;
+  };
