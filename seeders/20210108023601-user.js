@@ -3,7 +3,7 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('Users', [{ 
-      firstName: "test@rmail.com",
+      firstName: "test@email.com",
       lastName: null,
       userId: "12345",
       totalScore: 0,
@@ -18,6 +18,6 @@ module.exports = {
 
   down: async (queryInterface, Sequelize) => {
     return queryInterface.bulkDelete('Users', null, {}) 
-  } 
+   
   }
 };

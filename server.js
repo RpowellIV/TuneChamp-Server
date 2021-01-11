@@ -25,15 +25,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(session({
-    secret: 'super-secret',
-    cookie: { maxAge: 60000 }
-}))
+    secret: "super secret",
+    cookie: {maxAge: 60000}
+  }))
 
 app.use(passport.initialize());
 app.use(passport.session());
 
-// passport.use(spotifyStrategy);
-passport.use(gitHubStrategy);
+passport.use(spotifyStrategy);
+// passport.use(gitHubStrategy);
 
 app.use('/', express.static(__dirname + '/public'))
 app.use('/js', express.static(__dirname + '/js'))
@@ -52,11 +52,11 @@ app.get('/logged', (req,res) => {
 });
 
 heartbeat(app);
-// login(app,passport);
-gitAuth(app,passport);
+login(app,passport);
+// gitAuth(app,passport);
 dashBoard(app, ensureAuthenticated);
 
 
-app.listen(3000, () => {
-  console.log(`The server is listening...`);
+app.listen(process.env.PORT, () => {
+  console.log(`The server is running at port ${process.env.PORT}`);
 });

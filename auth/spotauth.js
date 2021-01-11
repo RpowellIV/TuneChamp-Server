@@ -1,3 +1,4 @@
+require('dotenv').config();
 module.exports = (app, passport) => {
     
 var SpotifyWebApi = require('spotify-web-api-node');
@@ -12,11 +13,11 @@ const redirectUri = "http://localhost:3000/logged";
 const clientId = "3df631b3b2aa48ccb68f10acfdc8a359"
 
 
-// var spotifyApi = new SpotifyWebApi({
-//     clientId: clientId,
-//     clientSecret: '7525ccd7f9fc4ff5884e333def1c8575',
-//     redirectUri: redirectUri,
-//   });
+var spotifyApi = new SpotifyWebApi({
+    clientID: process.env.SPOTIFY_ID,
+    clientSecret: process.env.SPOTIFY_SECRET,
+    redirectUri: redirectUri,
+  });
 
 const scopes = [
     "user-read-currently-playing",
@@ -34,6 +35,29 @@ const loginUrl = `${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectU
 app.get('/login', (req, res) => {
     res.redirect(loginUrl);
 });
+
+
+app.get('/auth/spotify/callback', async (req,res) => {
+            const { code } = req.query;
+            console.log(code)
+            try {
+              var data = await spotifyApi.authorizationCodeGrant(code)
+              const { access_token, refresh_token } = data.body;
+              spotifyApi.setAccessToken(access_token);
+              spotifyApi.setRefreshToken(refresh_token);
+          
+              res.redirect('/dashboard');
+            } catch(err) {
+              res.redirect('/#/error/invalid token');
+            }
+          });
+          
+
+app.get('/logout', (req, res) => {
+    req.logout()
+    res.redirect("/")
+  });
+
 
 /* GET home page. */
 // auth.get('/', function(req, res, next) {
