@@ -26,6 +26,7 @@
     "passport-spotify": "^1.1.0",
     "pg": "^8.5.1",
     "pg-promise": "^10.8.7",
+    "request": "^2.88.2",
     "sequelize": "^6.3.5",
     "spotify-web-api-js": "^1.5.1",
     "spotify-web-api-node": "^5.0.0",

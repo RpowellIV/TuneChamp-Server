@@ -13,6 +13,7 @@ const spotifyStrategy = require('./config/spotifyStrategy');
 const heartbeat = require("./router/heartBeat");
 const login = require('./auth/spotauth')
 const dashBoard = require('./api/dashboard')
+const spotifyToken = require('./api/spotifyToken')
 
 const gitHubStrategy = require('./config/gitHubStrategy');
 const gitAuth = require('./auth/gitAuth')
@@ -26,6 +27,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(session({
     secret: "super secret",
+    keys: ['key1', 'key2'],
     cookie: {maxAge: 60000}
   }))
 
@@ -45,16 +47,11 @@ app.get('/', (req,res) => {
     })
 });
 
-app.get('/logged', (req,res) => {
-    res.json({
-        is:"LOGGED IN"
-    })
-});
-
 heartbeat(app);
 login(app,passport);
 // gitAuth(app,passport);
 dashBoard(app, ensureAuthenticated);
+spotifyToken(app,fetch)
 
 
 app.listen(process.env.PORT, () => {

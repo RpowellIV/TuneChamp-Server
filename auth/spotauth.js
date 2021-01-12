@@ -1,5 +1,22 @@
-require('dotenv').config();
 module.exports = (app, passport) => {
+require('dotenv').config();
+var request = require('request');
+
+var headers = {
+    'Authorization': 'Bearer BQBEr3K6UprdWh_DgEvrqkmGiAUup8A2LBgnpheScKFnO3AwDUo9H_reb9Y5H7k_LjbrjEHJasx9RKynody3WJok6vvWdig_ocirgDHPe11lXCQFAiCujE5LxfEWsAhUcbzmYjdd4iQdUlIisigfWgnBs4xMNw1EnaHPcuVcCo3jU0dsRZZVFpMVeStrYfc'
+};
+
+var options = {
+    url: 'https://api.spotify.com/v1/me',
+    headers: headers
+};
+
+function callback(err, res, body) {
+    if (!err && res.statusCode == 200) {
+        console.log(body);
+    }
+}
+
     
 var SpotifyWebApi = require('spotify-web-api-node');
 
@@ -7,7 +24,8 @@ var SpotifyWebApi = require('spotify-web-api-node');
 const authEndpoint = "https://accounts.spotify.com/authorize";
 
 //set previously on Spotify
-const redirectUri = "http://localhost:3000/logged";
+//urlencoded
+const redirectUri = "http%3A%2F%2Flocalhost%3A3000%2Flogged";
 
 //login id
 const clientId = "3df631b3b2aa48ccb68f10acfdc8a359"
@@ -23,12 +41,12 @@ const scopes = [
     "user-read-currently-playing",
     "user-read-recently-played",
     "user-read-playback-state",
+    "playlist-read-private",
     "user-top-read",
     "user-modify-playback-state",
     "user-read-private",
-    "user-read-email"
+    "user-read-email",
 ]; 
-
 
 const loginUrl = `${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join("%20")}&response_type=token&show_dialog=true`;
 
@@ -38,27 +56,41 @@ app.get('/login', (req, res) => {
 
 
 app.get('/auth/spotify/callback', async (req,res) => {
-            const { code } = req.query;
-            console.log(code)
-            try {
-              var data = await spotifyApi.authorizationCodeGrant(code)
-              const { access_token, refresh_token } = data.body;
-              spotifyApi.setAccessToken(access_token);
-              spotifyApi.setRefreshToken(refresh_token);
-          
-              res.redirect('/dashboard');
-            } catch(err) {
-              res.redirect('/#/error/invalid token');
-            }
-          });
-          
+    const { access_token } = req.query;
+    console.log('acces token:', access_token)
+    try {
+      var data = await spotifyApi.authorizationCodeGrant(access_token)
+      const { access_token, refresh_token } = data.body;
+      spotifyApi.setAccessToken(access_token);
+      spotifyApi.setRefreshToken(refresh_token);
+  
+      res.redirect('/dashboard');
+    } catch(err) {
+      res.redirect('/#/error/invalid token');
+    }
+  });
+
+app.get('/logged', async (req,res) =>{
+
+      res.json({
+          is:"LOGGED IN",
+      })
+});
+
+app.get('/aboutme', (req,res) => {
+  request(options, callback);
+    // spotifyApi.getMe()
+    //     .then(user =>{
+    //         console.log(user)
+    //     })
+});
 
 app.get('/logout', (req, res) => {
     req.logout()
     res.redirect("/")
   });
 
-
+};
 /* GET home page. */
 // auth.get('/', function(req, res, next) {
 //     res.render('index', { title: 'Express' });
@@ -107,6 +139,3 @@ app.get('/logout', (req, res) => {
 //     }
   
 //   });
-};
- 
-
