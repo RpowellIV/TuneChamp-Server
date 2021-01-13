@@ -14,7 +14,7 @@ const heartbeat = require('./router/heartBeat');
 const login = require('./auth/spotauth');
 const dashBoard = require('./api/dashboard');
 const spotifyToken = require('./api/spotifyToken');
-const leaderboard = require('./api/leaderboard');
+const leaderboard = require('./router/leaderboard');
 
 const gitHubStrategy = require('./config/gitHubStrategy');
 const gitAuth = require('./auth/gitAuth');
