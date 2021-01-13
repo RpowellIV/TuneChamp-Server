@@ -1,4 +1,5 @@
 'use strict';
+
 const faker = require('faker');
 
 module.exports = {
@@ -21,7 +22,7 @@ module.exports = {
       });
     }
 
-    return queryInterface.bulkInsert('Users', [{ 
+    return queryInterface.bulkInsert('Users', data, [{ 
       firstName: "test@email.com",
       lastName: null,
       userId: "12345",
@@ -32,7 +33,7 @@ module.exports = {
       spotifyAccessToken:  "123xyz", 
       createdAt: new Date(), 
       updatedAt: new Date() 
-        }], {}); 
+      }], {}); 
   },
 
   down: async (queryInterface, Sequelize) => {
