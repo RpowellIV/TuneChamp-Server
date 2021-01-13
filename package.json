@@ -20,6 +20,7 @@
     "ejs": "^3.1.5",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
+    "faker": "^5.1.0",
     "node-fetch": "^2.6.1",
     "passport": "^0.4.1",
     "passport-github": "^1.1.0",

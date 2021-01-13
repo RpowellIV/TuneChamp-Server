@@ -25,7 +25,7 @@ module.exports = (app, fetch) => {
             await newUser.save()
             return newUser;
         } else {
-          return 'USER ALREADY EXSIT'
+          return 'USER ALREADY EXIST'
         }
       
       });
