@@ -6,6 +6,10 @@ module.exports = (app) => {
     let allUsers = await db.User.findAll({
       attributes: ['userId', 'totalScore'],
     });
+
+    //sorts users by their score from greatest to least
+    allUsers.sort((a, b) => (a.totalScore < b.totalScore ? 1 : -1));
+
     res.json({
       is: 'working',
       allUsers,
