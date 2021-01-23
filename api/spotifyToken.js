@@ -3,7 +3,8 @@ module.exports = (app, fetch) => {
 
   app.post('/user', async (req, res) => {
     const { user, token } = req.body;
-    console.log(user, token);
+
+    console.log("user and token", user, token);
     console.log(req.body);
 
     let newUser = await models.User.findOne({ where: { userId: user.id } });
