@@ -31,7 +31,6 @@
     "pg-promise": "^10.8.7",
     "request": "^2.88.2",
     "sequelize": "^6.3.5",
-    "sequelize-cli": "^4.0.0",
     "spotify-web-api-js": "^1.5.1",
     "spotify-web-api-node": "^5.0.0",
     "url": "^0.11.0"

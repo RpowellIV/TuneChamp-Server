@@ -29,13 +29,13 @@ if (process.env.DATABASE_URL) {
   })
 }
 const app = express();
-const { Pool } = require('pg'); 
-const pool = new Pool({ 
-  connectionString: process.env.DATABASE_URL, 
-  ssl: { 
-    rejectUnauthorized: false 
-  } 
-}); 
+// `const { Pool } = require('pg'); 
+// const pool = new Pool({ 
+//   connectionString: process.env.DATABASE_URL, 
+//   ssl: { 
+//     rejectUnauthorized: false 
+//   } 
+// }); `
 // attach passport to express and sessions
 app.use(cors());
 app.use(bodyParser.json());
