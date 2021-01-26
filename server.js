@@ -15,6 +15,7 @@ const login = require('./auth/spotauth');
 const dashBoard = require('./api/dashboard');
 const spotifyToken = require('./api/spotifyToken');
 const leaderboard = require('./router/leaderboard');
+const score = require('./router/score');
 
 const gitHubStrategy = require('./config/gitHubStrategy');
 const gitAuth = require('./auth/gitAuth');
@@ -56,6 +57,7 @@ login(app, passport);
 dashBoard(app, ensureAuthenticated);
 spotifyToken(app, fetch);
 leaderboard(app);
+score(app);
 
 app.listen(process.env.PORT, () => {
   console.log(`The server is running at port ${process.env.PORT}`);
