@@ -11,7 +11,7 @@ module.exports = {
       data.push({
         firstName: faker.internet.email(),
         lastName: null,
-        userId: faker.finance.routingNumber(),
+        userId: faker.internet.userName(),
         totalScore: faker.random.number(),
         userName:  faker.internet.userName(),
         country: faker.address.country(),
